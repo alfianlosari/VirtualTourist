@@ -16,14 +16,15 @@ struct FlickrPhotoStore {
     static private let flickrSecretKey = "cbf94c0d46db14e5"
     static private let flickrBaseURL = "https://api.flickr.com/services/rest"
     
-    static func searchPhotos(lat: Double, lon: Double, completionHandler: @escaping GetPhotoResponseCompletionHandler) {
+    static func searchPhotos(lat: Double, lon: Double, page: Int, completionHandler: @escaping GetPhotoResponseCompletionHandler) {
         var url = URL(string: flickrBaseURL)!
         let URLParams = [
             "method": "flickr.photos.search",
             "api_key": flickrApiKey,
             "lon": "\(lon)",
             "format": "json",
-            "per_page": "100",
+            "page": "\(page)",
+            "per_page": "21",
             "lat": "\(lat)",
             "nojsoncallback": "1"
             ]

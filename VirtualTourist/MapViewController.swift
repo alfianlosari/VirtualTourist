@@ -139,8 +139,4 @@ extension MapViewController: NSFetchedResultsControllerDelegate {
             
         }
     }
-    
 }
-
-
-

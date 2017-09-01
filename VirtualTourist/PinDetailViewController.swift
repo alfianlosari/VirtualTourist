@@ -59,9 +59,10 @@ class PinDetailViewController: UIViewController {
         } else {
             self.bottomBarItem.title = "Remove Selected Pictures"
         }
-        
-        
-        
+    }
+    
+    var randomPage: Int {
+        return Int(arc4random_uniform(100) + 1)
     }
 
     
@@ -91,7 +92,6 @@ class PinDetailViewController: UIViewController {
         mapView.isUserInteractionEnabled = false
     }
     
-    
     func getPhotosFromFlickr() {
         self.bottomBarItem.isEnabled = false
         guard let moc = self.pin.managedObjectContext else { return }
@@ -100,7 +100,7 @@ class PinDetailViewController: UIViewController {
         
         do {
             try moc.save()
-            FlickrPhotoStore.searchPhotos(lat: pin.latitude, lon: pin.longitude) { [weak self] (photos, error) in
+            FlickrPhotoStore.searchPhotos(lat: pin.latitude, lon: pin.longitude, page: randomPage) { [weak self] (photos, error) in
                 self?.bottomBarItem.isEnabled = true
                 guard let strongSelf = self,
                     let pin = strongSelf.pin,
